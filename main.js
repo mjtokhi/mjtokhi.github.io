@@ -35,8 +35,8 @@ const material = new THREE.MeshStandardMaterial({
   color: 0xffffff,
 });
 const sphere = new THREE.Mesh(geometry, material);
-sphere.scale.set(.1,.1,.1)
-sphere.position.setX(-20)
+sphere.scale.set(.001,.1,.1)
+sphere.position.setX(-30)
 scene.add(sphere);
 
 
@@ -70,11 +70,20 @@ loader.load(
 // #### VENUSAUR END #####
 //*/
 
-scene.background = new THREE.Color(0xfffff)
+scene.background = new THREE.Color(0x000000)
 
 // LIGHTING
-const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(20, 20, 20, 5);
+const pointLight = new THREE.PointLight(0xffffff, .7);
+pointLight.position.set(20, 60, -10);
+
+const hemlight = new THREE.PointLight(0xffffff, .7);
+hemlight.position.set(-50, -60, -10);
+scene.add( hemlight );
+
+const hemlight1 = new THREE.PointLight(0xffffff, 2);
+hemlight1.position.set(0, 0, 700);
+scene.add( hemlight1 );
+
 scene.add(pointLight);
 
 const lightHelper = new THREE.PointLightHelper(pointLight);
