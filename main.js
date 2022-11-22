@@ -28,20 +28,18 @@ camera.position.setZ(30);
 // RENDER
 renderer.render(scene, camera);
 
-
 // ADD SPHERE
 const geometry = new THREE.SphereGeometry(15, 32, 16);
-const material = new THREE.MeshBasicMaterial({
-  color: 0xfffff,
-  //wireframe: true,
+const material = new THREE.MeshStandardMaterial({
+  color: 0xffffff,
 });
-//const sphere = new THREE.Mesh(geometry, material);
-//scene.add(sphere);
+const sphere = new THREE.Mesh(geometry, material);
+scene.add(sphere);
 //
 
-
 const loader = new GLTFLoader();
-
+/*
+// ###### LOAD VENUSAUR GLB ############
 // Load a glTF resource
 loader.load(
   // resource URL
@@ -50,16 +48,6 @@ loader.load(
   function (gltf) {
     const venuSaur = gltf.scene;
     scene.add(venuSaur);
-    /*
-    scene.add(gltf.scene);
-
-    gltf.animations; // Array<THREE.AnimationClip>
-    gltf.scene; // THREE.Group
-    gltf.scenes; // Array<THREE.Group>
-    gltf.cameras; // Array<THREE.Camera>
-    gltf.asset; // Object
-  */
-
   },
   // called while loading is progressing
   function (xhr) {
@@ -70,19 +58,30 @@ loader.load(
     console.log('An error happened');
   }
 );
+// #### VENUSAUR END #####
+*/
 
+
+// LIGHTING
+const pointLight = new THREE.PointLight(0xffffff);
+pointLight.position.set(20, 20, 20);
+scene.add(pointLight);
+
+const lightHelper = new THREE.PointLightHelper(pointLight);
+scene.add(lightHelper)
+
+// mouse listener
 const controls = new OrbitControls(camera, renderer.domElement);
 
-const ambientLight = new THREE.AmbientLight(0xffffff);
-pointLight.position.set( 70, 75, 75);
-scene.add(ambientLight);
-
+// ANIMATE / RENDER
 function animate() {
   requestAnimationFrame(animate);
 
   sphere.rotation.y += 0.01;
 
   controls.update();
+
   renderer.render(scene, camera);
 }
+
 animate();
