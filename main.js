@@ -35,7 +35,7 @@ const material = new THREE.MeshStandardMaterial({
   color: 0xffffff,
 });
 const sphere = new THREE.Mesh(geometry, material);
-sphere.scale.set(.001,.1,.1)
+sphere.scale.set(.001,.001,.001)
 sphere.position.setX(-30)
 scene.add(sphere);
 
@@ -70,7 +70,8 @@ loader.load(
 // #### VENUSAUR END #####
 //*/
 
-scene.background = new THREE.Color(0x000000)
+// BACKGROUND
+scene.background = new THREE.Color(0x339C48)
 
 // LIGHTING
 const pointLight = new THREE.PointLight(0xffffff, .7);
@@ -80,7 +81,7 @@ const hemlight = new THREE.PointLight(0xffffff, .7);
 hemlight.position.set(-50, -60, -10);
 scene.add( hemlight );
 
-const hemlight1 = new THREE.PointLight(0xffffff, 2);
+const hemlight1 = new THREE.PointLight(0xffffff, 2.5);
 hemlight1.position.set(0, 0, 700);
 scene.add( hemlight1 );
 
@@ -96,7 +97,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 function animate() {
   requestAnimationFrame(animate);
 
-  sphere.rotation.y += 0.01;
+  pokemon.rotation.y += 0.003;
 
   controls.update();
 
