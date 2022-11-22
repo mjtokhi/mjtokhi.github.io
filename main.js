@@ -3,7 +3,7 @@
 import './style.css';
 import * as THREE from 'three';
 import { OrbitControls } from 'three/examples/jsm/controls/OrbitControls';
-import './GLTFLoader.js';
+import {GLTFLoader} from 'three/examples/jsm/loaders/GLTFLoader.js';
 
 // SCENE INIT
 const scene = new THREE.Scene();
@@ -23,10 +23,11 @@ const renderer = new THREE.WebGLRenderer({
 
 renderer.setPixelRatio(window.devicePixelRatio);
 renderer.setSize(window.innerWidth, window.innerHeight);
-camera.position.setZ(30);
+camera.position.set(10,10, 50);
 
 // RENDER
 renderer.render(scene, camera);
+
 
 // ADD SPHERE
 const geometry = new THREE.SphereGeometry(15, 32, 16);
@@ -34,20 +35,28 @@ const material = new THREE.MeshStandardMaterial({
   color: 0xffffff,
 });
 const sphere = new THREE.Mesh(geometry, material);
+sphere.scale.set(.1,.1,.1)
+sphere.position.setX(-20)
 scene.add(sphere);
-//
 
-const loader = new GLTFLoader();
-/*
+
+///*
 // ###### LOAD VENUSAUR GLB ############
+const loader = new GLTFLoader();
+var pokemon;
+
 // Load a glTF resource
 loader.load(
   // resource URL
-  './VEN.glb',
+  "VEN.glb",
   // called when the resource is loaded
   function (gltf) {
-    const venuSaur = gltf.scene;
-    scene.add(venuSaur);
+    pokemon = gltf.scene;
+
+    const poke = gltf.scene;
+    poke.scale.set(7,7,7)
+    poke.position.set(0,-10,0)
+    scene.add(poke);
   },
   // called while loading is progressing
   function (xhr) {
@@ -59,12 +68,13 @@ loader.load(
   }
 );
 // #### VENUSAUR END #####
-*/
+//*/
 
+scene.background = new THREE.Color(0xfffff)
 
 // LIGHTING
 const pointLight = new THREE.PointLight(0xffffff);
-pointLight.position.set(20, 20, 20);
+pointLight.position.set(20, 20, 20, 5);
 scene.add(pointLight);
 
 const lightHelper = new THREE.PointLightHelper(pointLight);
